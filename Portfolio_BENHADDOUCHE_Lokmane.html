@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokmane Benhaddouche | AI/ML Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f4c75;
+            --text: #e0e0e0;
+            --text-light: #b0b0b0;
+            --bg: #0f0f1e;
+            --bg-alt: #1a1a2e;
+            --border: #2a2a3e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(15, 76, 117, 0.1) 0%, transparent 50%);
+        }
+
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ai-animation {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .neural-node {
+            width: 8px;
+            height: 8px;
+            background: #3498db;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 10px #3498db;
+            animation: pulse 2s infinite;
+        }
+
+        .neural-node:nth-child(1) { top: 0; left: 26px; animation-delay: 0s; }
+        .neural-node:nth-child(2) { top: 15px; left: 0; animation-delay: 0.2s; }
+        .neural-node:nth-child(3) { top: 15px; left: 52px; animation-delay: 0.4s; }
+        .neural-node:nth-child(4) { top: 30px; left: 10px; animation-delay: 0.6s; }
+        .neural-node:nth-child(5) { top: 30px; left: 42px; animation-delay: 0.8s; }
+        .neural-node:nth-child(6) { top: 45px; left: 26px; animation-delay: 1s; }
+
+        .neural-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            transform-origin: left center;
+            animation: flow 3s infinite;
+        }
+
+        .connection-1 { top: 4px; left: 30px; width: 25px; transform: rotate(30deg); }
+        .connection-2 { top: 4px; left: 26px; width: 28px; transform: rotate(-30deg); }
+        .connection-3 { top: 19px; left: 8px; width: 40px; }
+        .connection-4 { top: 19px; left: 8px; width: 18px; transform: rotate(45deg); }
+        .connection-5 { top: 19px; left: 46px; width: 18px; transform: rotate(-45deg); }
+        .connection-6 { top: 34px; left: 14px; width: 25px; transform: rotate(-30deg); }
+        .connection-7 { top: 34px; left: 34px; width: 25px; transform: rotate(30deg); }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes flow {
+            0% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-info span {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-light);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .lang-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-alt);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--text);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #3498db;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: var(--bg-alt);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(15, 76, 117, 0.4);
+        }
+
+        .skill-card h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-alt);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(15, 76, 117, 0.4);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-card h3 {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: #5dade2;
+        }
+
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            background: var(--bg-alt);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-left: 4px solid #3498db;
+        }
+
+        .experience-item h3 {
+            color: var(--text);
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .experience-meta {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .experience-item ul {
+            margin-left: 20px;
+            color: var(--text-light);
+        }
+
+        .experience-item li {
+            margin-bottom: 8px;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--bg-alt);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 2px solid var(--border);
+        }
+
+        .contact-link:hover {
+            background: var(--secondary);
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            nav .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <div class="ai-animation">
+                    <div class="neural-connection connection-1"></div>
+                    <div class="neural-connection connection-2"></div>
+                    <div class="neural-connection connection-3"></div>
+                    <div class="neural-connection connection-4"></div>
+                    <div class="neural-connection connection-5"></div>
+                    <div class="neural-connection connection-6"></div>
+                    <div class="neural-connection connection-7"></div>
+                    <div class="neural-node"></div>
+                    <div class="neural-node"></div>
+                    <div class="neural-node"></div>
+                    <div class="neural-node"></div>
+                    <div class="neural-node"></div>
+                    <div class="neural-node"></div>
+                </div>
+                <span data-en="Lokmane Benhaddouche" data-fr="Lokmane Benhaddouche">Lokmane Benhaddouche</span>
+            </h1>
+            <p class="subtitle" data-en="AI/ML Engineer" data-fr="Ingénieur IA/ML">AI/ML Engineer</p>
+            <div class="header-info">
+                <span>
+                    <svg class="info-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px; fill: currentColor; vertical-align: middle; margin-right: 5px;">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <span data-en="Oran, Algeria" data-fr="Oran, Algérie">Oran, Algeria</span>
+                </span>
+                <span>
+                    <svg class="info-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px; fill: currentColor; vertical-align: middle; margin-right: 5px;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    </svg>
+                    <span data-en="27 Years Old" data-fr="27 Ans">27 Years Old</span>
+                </span>
+                <span>
+                    <svg class="info-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px; fill: currentColor; vertical-align: middle; margin-right: 5px;">
+                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                    </svg>
+                    <span data-en="AI & Machine Learning" data-fr="IA & Machine Learning">AI & Machine Learning</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <ul>
+                    <li><a href="#about" data-en="About" data-fr="À Propos">About</a></li>
+                    <li><a href="#skills" data-en="Skills" data-fr="Compétences">Skills</a></li>
+                    <li><a href="#projects" data-en="Projects" data-fr="Projets">Projects</a></li>
+                    <li><a href="#experience" data-en="Experience" data-fr="Expérience">Experience</a></li>
+                    <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('en')" id="btn-en">
+                        <span class="lang-icon">🇬🇧</span>
+                        EN
+                    </button>
+                    <button class="lang-btn" onclick="switchLanguage('fr')" id="btn-fr">
+                        <span class="lang-icon">🇫🇷</span>
+                        FR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about">
+        <div class="container">
+            <h2 data-en="About Me" data-fr="À Propos de Moi">About Me</h2>
+            <div class="about-content fade-in">
+                <p data-en="I am a passionate AI/ML Engineer with expertise in developing intelligent systems and machine learning solutions. With a strong foundation in artificial intelligence, I specialize in creating innovative solutions that leverage the power of data and advanced algorithms." data-fr="Je suis un ingénieur IA/ML passionné avec une expertise dans le développement de systèmes intelligents et de solutions d'apprentissage automatique. Avec une solide base en intelligence artificielle, je me spécialise dans la création de solutions innovantes qui exploitent la puissance des données et des algorithmes avancés.">I am a passionate AI/ML Engineer with expertise in developing intelligent systems and machine learning solutions. With a strong foundation in artificial intelligence, I specialize in creating innovative solutions that leverage the power of data and advanced algorithms.</p>
+                <p style="margin-top: 20px;" data-en="My work focuses on [YOUR SPECIFIC FOCUS - e.g., building scalable ML pipelines, developing computer vision applications, implementing NLP solutions]. I am committed to staying at the forefront of AI technology and applying cutting-edge techniques to solve real-world problems." data-fr="Mon travail se concentre sur [VOTRE SPÉCIALITÉ - par ex., la création de pipelines ML évolutifs, le développement d'applications de vision par ordinateur, la mise en œuvre de solutions NLP]. Je m'engage à rester à la pointe de la technologie IA et à appliquer des techniques de pointe pour résoudre des problèmes concrets.">My work focuses on [YOUR SPECIFIC FOCUS - e.g., building scalable ML pipelines, developing computer vision applications, implementing NLP solutions]. I am committed to staying at the forefront of AI technology and applying cutting-edge techniques to solve real-world problems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 data-en="Technical Skills" data-fr="Compétences Techniques">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <h3>Machine Learning</h3>
+                    <p>TensorFlow, PyTorch, scikit-learn, Keras</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3>Programming</h3>
+                    <p>Python, R, SQL, JavaScript</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3>Deep Learning</h3>
+                    <p>CNN, RNN, Transformers, GANs</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3>Data Science</h3>
+                    <p>Pandas, NumPy, Matplotlib, Seaborn</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS, JavaScript, React, Node.js</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3>Cloud & DevOps</h3>
+                    <p>AWS, Azure, Docker, Git</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3>Specializations</h3>
+                    <p>NLP, Computer Vision, MLOps</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 data-en="Featured Projects" data-fr="Projets en Vedette">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>Project Name 1</h3>
+                        <p>Brief description of your project and the problem it solves. Highlight key achievements and impact.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>Project Name 2</h3>
+                        <p>Brief description of your project and the problem it solves. Highlight key achievements and impact.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">Flask</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>Project Name 3</h3>
+                        <p>Brief description of your project and the problem it solves. Highlight key achievements and impact.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">BERT</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 data-en="Experience" data-fr="Expérience">Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item fade-in">
+                    <h3>AI/ML Engineer</h3>
+                    <p class="experience-meta">Company Name | Month Year - Present</p>
+                    <ul>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                    </ul>
+                </div>
+                <div class="experience-item fade-in">
+                    <h3>Previous Position</h3>
+                    <p class="experience-meta">Company Name | Month Year - Month Year</p>
+                    <ul>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                        <li>Key achievement or responsibility</li>
+                    </ul>
+                </div>
+                <div class="experience-item fade-in">
+                    <h3>Education</h3>
+                    <p class="experience-meta">Degree in Field | University Name | Year</p>
+                    <p>Relevant coursework, honors, or achievements</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 data-en="Get In Touch" data-fr="Contactez-Moi">Get In Touch</h2>
+            <div class="contact-content">
+                <p style="color: var(--text-light); margin-bottom: 30px;" data-en="I'm always interested in discussing new opportunities, collaborations, or innovative AI/ML projects." data-fr="Je suis toujours intéressé à discuter de nouvelles opportunités, collaborations ou projets innovants en IA/ML.">I'm always interested in discussing new opportunities, collaborations, or innovative AI/ML projects.</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-link">
+                        <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        Email
+                    </a>
+                    <a href="https://github.com/lokmanben" class="contact-link" target="_blank">
+                        <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/lokmane-benhaddouche-374152247/" class="contact-link" target="_blank">
+                        <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p data-en="&copy; 2026 Lokmane Benhaddouche. All rights reserved." data-fr="&copy; 2026 Lokmane Benhaddouche. Tous droits réservés.">&copy; 2026 Lokmane Benhaddouche. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                currentLang: 'en'
+            },
+            fr: {
+                currentLang: 'fr'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update button states
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(element => {
+                const text = element.getAttribute(`data-${lang}`);
+                if (text) {
+                    if (element.tagName === 'P' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'SPAN') {
+                        element.textContent = text;
+                    } else {
+                        element.innerHTML = text;
+                    }
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Active navigation highlight
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
